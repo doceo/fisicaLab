@@ -8,12 +8,12 @@
 #define ECHO A4
 #define BUZZER 9
 
-#define NOISE A0
+#define NOISE 6
 
 int noiseValue;
 int cmconv =49;
-double sonar[10];
-long int mic[10];
+double sonar[5];
+long int mic[5];
 double timeAvg = 0;
 double vel;
 bool start=false;
@@ -34,13 +34,11 @@ void setup() {
 
     pinMode(NOISE, INPUT);
 
-    while(!noiseLevel()){
-      
-      if(noiseLevel()){ start=true;
-      
-      }
-    }
-    
+    while(!start){
+      if(digitalRead(NOISE)) start=true;
+//      Serial.println(digitalRead(NOISE));
+//      Serial.println(distanza());
+     }
     beep(500);
     delay(1000);
 }
@@ -50,17 +48,21 @@ void loop() {
   for(int i=5; i>=0; i--){
     Serial.println(i);
   }
-  Serial.print("via!");
+  Serial.println("via!");
+  Serial.println("");
 
-
-  for(int i =0; i<10;i++){
+  for(int i =0; i<5;i++){
 
   sonar[i]=temp();
+  Serial.print("tempo[");
+  Serial.print(sonar[i]);
+  Serial.println("]");
   delay(100);
-  beep(200);  
+  Serial.println("");
+  beep(200);
   }
 
-  for(int i =0; i<10;){
+  for(int i =0; i<5; i++){
 
   timeAvg = timeAvg + sonar[i];
 
@@ -72,17 +74,14 @@ void loop() {
   Serial.println();
   
   double vel = 2*(DIST)/(double(timeAvg)/1000);
-  Serial.print("vel in m/s: ");
+  Serial.print("la velocita' in m/s: ");
   Serial.println(vel);
 
   start=false;
   
-     while(!noiseLevel()){
-      
-      if(noiseLevel()){ start=true;
-      
-      }
+  while(!start){
+    if(digitalRead(NOISE)) start=true;
     }
-}
+  }
   
  

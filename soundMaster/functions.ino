@@ -15,14 +15,15 @@ double distanza(){
   digitalWrite(TRIG,LOW);                                           // e si ferma
 
   long duration =pulseIn(ECHO, HIGH);                                  //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
-  
+  Serial.print("duration: ");
+  Serial.println(duration);
   Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
   double durationInMillis = (float)duration/1000;
 
   Serial.println(durationInMillis);
 
   
-  if (duration >38000) { 
+  if (duration >500000) { 
           Serial.println("fuori portata");                                 //segnaliamo se la distanza è fuori dalla portata dello strumento
   
   }else if(duration == 0){
@@ -35,7 +36,7 @@ double distanza(){
        // Serial.print(distanza);
        // Serial.println ("cm");
     }
-         
+Serial.println();         
 return distanza;  
 
 }
@@ -43,13 +44,19 @@ return distanza;
 double temp(){
 
   double tempo;
-  digitalWrite (TRIG, HIGH);                                     // attraverso il trigger inizia a emettere onde
-  delayMicroseconds(10);                                         // per dieci microsecondi
-  digitalWrite(TRIG,LOW);                                        // e si ferma
+  digitalWrite (TRIG, HIGH);                                        // attraverso il trigger inizia a emettere onde
+  delayMicroseconds(10);                                                   // per dieci microsecondi
+  digitalWrite(TRIG,LOW);                                           // e si ferma
 
-  float duration =pulseIn(ECHO, HIGH);                          //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
+  long duration =pulseIn(ECHO, HIGH);                                  //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
+//  Serial.print("duration: ");
+//  Serial.println(duration);
+//  Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
+  double durationInMillis = (float)duration/1000;
+
+  Serial.println(durationInMillis);   
   
-  if (duration >38000) { 
+  if (duration >500000) { 
           tempo = -1;
           Serial.println("fuori portata");                      //segnaliamo se la distanza è fuori dalla portata dello strumento
   
@@ -60,9 +67,7 @@ double temp(){
 
     
   }else{ 
-       // Serial.print("distanza:"); 
- 
-        double durationInMillis = duration/1000;
+       // Serial.print("distanza:");  
         tempo = durationInMillis;
           
     }
@@ -74,20 +79,6 @@ return tempo;
 double microsecondsToCentimeters(double microseconds){
    return microseconds / cmconv;
   }
-
-  
-/**************************************************** 
- *SENSORE DI RUMORE
- *se il microfono percepisce un rumore compie 
- *un giro completo
- ****************************************************/
-
-bool noiseLevel(){
-
-
-  noiseValue = analogRead(NOISE);
-  if (noiseValue>500) return false;
-}
 
   
 /**************************************************** 
