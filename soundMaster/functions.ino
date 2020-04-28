@@ -75,8 +75,6 @@ double microsecondsToCentimeters(double microseconds){
    return microseconds / cmconv;
   }
 
-
-
   
 /**************************************************** 
  *SENSORE DI RUMORE
@@ -97,10 +95,10 @@ bool noiseLevel(){
  *il Buzzer ci permette di iniziare l'esercizio
  ****************************************************/
 
- void beep(){
+ void beep(int sec){
       
     digitalWrite (BUZZER, HIGH); 
-    delay(1000);
+    delay(sec);
     digitalWrite (BUZZER, LOW); 
 
  }

@@ -12,8 +12,12 @@
 
 int noiseValue;
 int cmconv =49;
-long int sonar[10];
+double sonar[10];
 long int mic[10];
+double timeAvg = 0;
+double vel;
+bool start=false;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,8 +34,14 @@ void setup() {
 
     pinMode(NOISE, INPUT);
 
-    while(noiseLevel());
-    beep();
+    while(!noiseLevel()){
+      
+      if(noiseLevel()){ start=true;
+      
+      }
+    }
+    
+    beep(500);
     delay(1000);
 }
 
@@ -40,15 +50,39 @@ void loop() {
   for(int i=5; i>=0; i--){
     Serial.println(i);
   }
-  Serial.print(via!);
+  Serial.print("via!");
 
+
+  for(int i =0; i<10;i++){
+
+  sonar[i]=temp();
+  delay(100);
+  beep(200);  
+  }
 
   for(int i =0; i<10;){
-    
+
+  timeAvg = timeAvg + sonar[i];
+
   }
+
+  Serial.print("Il tempo medio su dieci lanci e': ");
+  Serial.print(timeAvg);
+  Serial.println(" (millisecondi) ");   
+  Serial.println();
   
-  Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
- 
+  double vel = 2*(DIST)/(double(timeAvg)/1000);
+  Serial.print("vel in m/s: ");
+  Serial.println(vel);
+
+  start=false;
+  
+     while(!noiseLevel()){
+      
+      if(noiseLevel()){ start=true;
+      
+      }
+    }
 }
   
  
