@@ -1,5 +1,6 @@
 
 
+#define DIST 200
 
 #define MIN_DIST 3
 
@@ -9,33 +10,45 @@
 
 #define NOISE A0
 
-int cmconv = 59; 
 int noiseValue;
-
+int cmconv =49;
+long int sonar[10];
+long int mic[10];
 
 void setup() {
   // put your setup code here, to run once:
-   pinMode(TRIG, OUTPUT);
-   pinMode(ECHO, INPUT);
 
-  pinMode(BUZZER, OUTPUT);
+    
+    Serial.begin(9600);
+    Serial.println("Posiziona il sonar a 2 metri da una parete e batti le mani in prossimità di arduino");
+    Serial.println(); 
+    
+    pinMode(TRIG, OUTPUT);
+    pinMode(ECHO, INPUT);
 
-   pinMode(NOISE, INPUT);
+    pinMode(BUZZER, OUTPUT);
 
-  noiseLevel();
-  
-  while(dist() > 10){
-  }
-   
-   
+    pinMode(NOISE, INPUT);
+
+    while(noiseLevel());
+    beep();
+    delay(1000);
 }
 
 void loop() {
 
-  beep();
-  // put your main code here, to run repeatedly:
+  for(int i=5; i>=0; i--){
+    Serial.println(i);
+  }
+  Serial.print(via!);
 
-  if(noiseValue>100){
+
+  for(int i =0; i<10;){
     
-  beep();
+  }
+  
+  Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
+ 
 }
+  
+ 

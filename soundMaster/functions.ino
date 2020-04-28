@@ -6,7 +6,7 @@
  *fissare la distanza delloo SLAVE
  ****************************************************/
 
-double dist(){
+double distanza(){
  
   double distanza;
   
@@ -40,11 +40,42 @@ return distanza;
 
 }
 
-double microsecondsToCentimeters(double microseconds)
-  {
+double temp(){
+
+  double tempo;
+  digitalWrite (TRIG, HIGH);                                     // attraverso il trigger inizia a emettere onde
+  delayMicroseconds(10);                                         // per dieci microsecondi
+  digitalWrite(TRIG,LOW);                                        // e si ferma
+
+  float duration =pulseIn(ECHO, HIGH);                          //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
+  
+  if (duration >38000) { 
+          tempo = -1;
+          Serial.println("fuori portata");                      //segnaliamo se la distanza è fuori dalla portata dello strumento
+  
+  }else if(duration == 0){
+          
+          tempo = -2;
+          Serial.println("qualcosa è andato storto");           //segnaliamo se la distanza è fuori dalla portata dello strumento
+
+    
+  }else{ 
+       // Serial.print("distanza:"); 
+ 
+        double durationInMillis = duration/1000;
+        tempo = durationInMillis;
+          
+    }
+         
+return tempo;  
+
+}
+
+double microsecondsToCentimeters(double microseconds){
    return microseconds / cmconv;
   }
-  
+
+
 
   
 /**************************************************** 
@@ -53,12 +84,11 @@ double microsecondsToCentimeters(double microseconds)
  *un giro completo
  ****************************************************/
 
-void noiseLevel(){
+bool noiseLevel(){
 
 
-   noiseValue = analogRead(NOISE);
- //     Serial.println (noiseValue, DEC);
- 
+  noiseValue = analogRead(NOISE);
+  if (noiseValue>500) return false;
 }
 
   
@@ -70,7 +100,7 @@ void noiseLevel(){
  void beep(){
       
     digitalWrite (BUZZER, HIGH); 
-    delay(100);
+    delay(1000);
     digitalWrite (BUZZER, LOW); 
 
  }
