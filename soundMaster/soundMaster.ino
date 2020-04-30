@@ -68,12 +68,12 @@ void loop() {
 
   }
 
-  Serial.print("Il tempo medio su dieci lanci e': ");
+  Serial.print("Il tempo medio su cinque lanci e': ");
   Serial.print(timeAvg);
   Serial.println(" (millisecondi) ");   
   Serial.println();
   
-  double vel = 2*(DIST)/(double(timeAvg)/1000);
+  double vel = 2*(DIST/100)/(double(timeAvg)/1000);
   Serial.print("la velocita' in m/s: ");
   Serial.println(vel);
 

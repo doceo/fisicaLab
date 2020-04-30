@@ -41,6 +41,21 @@ return distanza;
 
 }
 
+/*
+ * questa funzione è necessaria al calcolo della distanza
+ * conoscendo la velocità del suono. Utilzza il fattore di 
+ * conversione cmconv
+ */
+double microsecondsToCentimeters(double microseconds){
+   return microseconds / cmconv;
+  }
+
+/*
+ * temp() è il nodo centrale dell'esperimento perchè attraverso
+ * questa funzione troviamo il tempo trascorso dall'emissione
+ * del segnale alla sua ricezione
+ */
+
 double temp(){
 
   double tempo;
@@ -76,9 +91,6 @@ return tempo;
 
 }
 
-double microsecondsToCentimeters(double microseconds){
-   return microseconds / cmconv;
-  }
 
   
 /**************************************************** 
