@@ -65,7 +65,7 @@ void loop() {
   for(int i =0; i<5; i++){
 
   timeAvg = timeAvg + sonar[i];
-  timeAvg = timeAvg/2;
+  timeAvg = timeAvg/(i+1);
 
   }
 
