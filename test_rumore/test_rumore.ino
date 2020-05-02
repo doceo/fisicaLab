@@ -7,7 +7,7 @@
 #define BUZZER 9
 
 #define NOISE_1 6
-#define NOISE_2 6
+#define NOISE_2 7
 
 unsigned long tZero, tUno;
 
@@ -33,7 +33,7 @@ while(inizio){
 }
 while(fine){
 
-  if(digitalRead(NOISE_1)){
+  if(digitalRead(NOISE_2)){
     tUno = micros();
     fine = false;
   }

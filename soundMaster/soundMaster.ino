@@ -1,88 +1,67 @@
 
+/*
+ * rilevazione della velocità del suono in due modalità:
+ * sensore ad ultrasioni
+ * sensore acustico
+ */
 
+//distanza fissa in centimetri
 #define DIST 200
 
-#define MIN_DIST 3
-
+//parametri relativi ai pin a cui corrispondono i sensori
 #define TRIG A5
 #define ECHO A4
 #define BUZZER 9
+#define NOISE_1 6
+#define NOISE_2 7
 
-#define NOISE 6
-
-int noiseValue;
+// valore di conversione per il calcolo della distanza
 int cmconv =49;
-double sonar[5];
-long int mic[5];
+
+//vettore in cui salvare i valori rilevati
+double tempo[5];
+
+//variabili utili al calcolo finale
 double timeAvg = 0;
 double vel;
 bool start=false;
 
 
 void setup() {
-  // put your setup code here, to run once:
-
-    
+    //inizializzo il monitor seriale
     Serial.begin(9600);
-    Serial.println("Posiziona il sonar a 2 metri da una parete e batti le mani in prossimità di arduino");
-    Serial.println(); 
+  
+    //definisco il tipo di pin: output e input
+      
+    pinMode(NOISE_1, INPUT);
+    pinMode(NOISE_2, INPUT);
     
     pinMode(TRIG, OUTPUT);
     pinMode(ECHO, INPUT);
 
     pinMode(BUZZER, OUTPUT);
 
-    pinMode(NOISE, INPUT);
-
-    while(!start){
-      if(digitalRead(NOISE)) start=true;
-//      Serial.println(digitalRead(NOISE));
-//      Serial.println(distanza());
-     }
-    beep(500);
-    delay(1000);
 }
 
 void loop() {
 
-  for(int i=5; i>=0; i--){
-    Serial.println(i);
-  }
-  Serial.println("via!");
+  Serial.println("Come vuoi rilevare la velocita' del suono?");
+  Serial.println("premi '1' per gli ultrasuoni");
+  Serial.println("premi 2 per le onde acustiche"); 
   Serial.println("");
 
-  for(int i =0; i<5;i++){
+    while (Serial.available() > 0) {
 
-  sonar[i]=temp();
-  Serial.print("tempo[");
-  Serial.print(sonar[i]);
-  Serial.println("]");
-  delay(100);
-  Serial.println("");
-  beep(200);
-  }
-
-  for(int i =0; i<5; i++){
-
-  timeAvg = timeAvg + sonar[i];
-  timeAvg = timeAvg/(i+1);
-
-  }
-
-  Serial.print("Il tempo medio su cinque lanci e': ");
-  Serial.print(timeAvg);
-  Serial.println(" (millisecondi) ");   
-  Serial.println();
-  
-  double vel = 2*(DIST/100)/(double(timeAvg)/1000);
-  Serial.print("la velocita' in m/s: ");
-  Serial.println(vel);
-
-  start=false;
-  
-  while(!start){
-    if(digitalRead(NOISE)) start=true;
+       if (Serial.read() == '1'){
+          ultrasuoni();
+       
+       }else if(Serial.read() == '2'){
+          microfono(); 
+       
+       }else{
+        Serial.println("scrivi 1 per il sonar oppure 2 per il microfono");
+       }
     }
-  }
+
   
- 
+} 
