@@ -1,3 +1,19 @@
+/***************************************************************
+ * DOMANDA()
+ * questa funzione stampa semplicemente al monitor la scelta 
+ * possibile
+ **************************************************************/
+
+void domanda(){
+  Serial.println("");
+  Serial.println("");
+  Serial.println("");
+  Serial.println("Come vuoi rilevare la velocita' del suono?");
+  Serial.println("premi '1' per gli ultrasuoni");
+  Serial.println("premi '2' per le onde acustiche"); 
+  Serial.println("");
+
+}
  /**************************************************************
   * ULTRASUONI()
   * peremtte il calcolo della velocità a partire da 5 rilevazioni
@@ -5,18 +21,16 @@
   **************************************************************/
   
 void ultrasuoni(){
+  
   Serial.println("verifica che il sensore sia a 2 metri da un ostacolo e poi premi un tasto qualsiasi");
   
   //attendo al pressione di un tasto qualsiasi
-  while (Serial.available() > 0){
-    
-  }
 
   
   for(int i=5; i>=0; i--){
       Serial.println(i);
   }
-  Serial.println("via!");
+  Serial.println("via! Eseguiamo 5 rilevazioni...");
   Serial.println("");
 
 //eseguo 5 rilevazioni e popolo il vettore temp()
@@ -25,8 +39,10 @@ void ultrasuoni(){
 
         tempo[i]=temp();
         Serial.print("tempo[");
-        Serial.print(tempo[i]);
-        Serial.println("]");
+        Serial.print(i);
+        Serial.print("]=");
+        Serial.println(tempo[i]);
+        Serial.println("");
         delay(100);
         Serial.println("");
         beep(200);
@@ -35,7 +51,6 @@ void ultrasuoni(){
 //calcolo la media delle rilevazioni
   for(int i =0; i<5; i++){
 
-  timeAvg = timeAvg + tempo[i];
   timeAvg = (i*timeAvg + tempo[i])/(i+1);
   }
   
@@ -49,6 +64,8 @@ void ultrasuoni(){
   double vel = 2*(DIST/100)/(double(timeAvg)/1000);
   Serial.print("la velocita' in m/s: ");
   Serial.println(vel);
+
+  domanda();
 }
 
 /*************************************************************
@@ -60,13 +77,11 @@ void ultrasuoni(){
  ************************************************************/
  
 void microfono(){
-
- Serial.println("verifica che i sensori sono posti a 2 metri di distanza e poi premi un tasto qualsiasi");
+ 
+ Serial.println("verifica che i sensori sono posti a 2 metri di distanza");
   
   //attendo al pressione di un tasto qualsiasi
-  while (Serial.available() > 0){
-    
-  }
+  
   Serial.println("");
 
     //variaibili necessarie alla rilevazione con sensore acustico
@@ -93,6 +108,7 @@ void microfono(){
             if(digitalRead(NOISE_1)){
                 tZero = micros();
                 inizio = false;
+                Serial.println(tZero);
             }
         }
         while(fine){
@@ -117,8 +133,6 @@ void microfono(){
 
   for(int i =0; i<5; i++){
 
-      timeAvg = timeAvg + tempo[i];
-
        timeAvg = (i*timeAvg + tempo[i])/(i+1);
 
   }
@@ -131,11 +145,12 @@ void microfono(){
   double vel = 2*(DIST/100)/(double(timeAvg)/1000);
   Serial.print("la velocita' in m/s: ");
   Serial.println(vel);
-    Serial.print("Il tempo intercorso tra la prima rilevazione e la seconda è: ");
-    Serial.println(deltaT);
-    Serial.println();
+  Serial.print("Il tempo intercorso tra la prima rilevazione e la seconda è: ");
+  Serial.println(deltaT);
+  Serial.println();
   
-  
+  Serial.println("");
+ 
 }
 /**************************************************************
  * TEMP() 
@@ -157,7 +172,7 @@ double temp(){
 //  Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
   double durationInMillis = (float)duration/1000;
 
-  Serial.println(durationInMillis);   
+//Serial.println(durationInMillis);   
   
   if (duration >500000) { 
           tempo = -1;

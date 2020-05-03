@@ -27,6 +27,7 @@ double vel;
 bool start=false;
 
 
+
 void setup() {
     //inizializzo il monitor seriale
     Serial.begin(9600);
@@ -40,28 +41,18 @@ void setup() {
     pinMode(ECHO, INPUT);
 
     pinMode(BUZZER, OUTPUT);
+    digitalWrite(BUZZER, LOW);
+
+    domanda();
 
 }
 
 void loop() {
-
-  Serial.println("Come vuoi rilevare la velocita' del suono?");
-  Serial.println("premi '1' per gli ultrasuoni");
-  Serial.println("premi 2 per le onde acustiche"); 
-  Serial.println("");
-
-    while (Serial.available() > 0) {
 
        if (Serial.read() == '1'){
           ultrasuoni();
        
        }else if(Serial.read() == '2'){
           microfono(); 
-       
-       }else{
-        Serial.println("scrivi 1 per il sonar oppure 2 per il microfono");
        }
-    }
-
-  
-} 
+}
