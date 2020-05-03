@@ -36,7 +36,7 @@ void ultrasuoni(){
   for(int i =0; i<5; i++){
 
   timeAvg = timeAvg + tempo[i];
-  timeAvg = timeAvg/(i+1);
+   timeAvg = (i*timeAvg + sonar[i])/(i+1);
   }
   
 //restituisco in output i valori trovati e il calcolo finale
@@ -118,7 +118,7 @@ void microfono(){
   for(int i =0; i<5; i++){
 
       timeAvg = timeAvg + tempo[i];
-      timeAvg = timeAvg/(i+1);
+       timeAvg = (i*timeAvg + sonar[i])/(i+1);
   }
   
     Serial.print("Il tempo medio su cinque lanci e': ");
