@@ -10,7 +10,7 @@ void domanda(){
   Serial.println("");
   Serial.println("Come vuoi rilevare la velocita' del suono?");
   Serial.println("premi '1' per gli ultrasuoni");
-  Serial.println("premi '2' per le onde acustiche"); 
+  Serial.println("premi '2' per le frequenze udibili"); 
   Serial.println("");
 
 }
@@ -245,7 +245,7 @@ double distanza(){
        // Serial.print(distanza);
        // Serial.println ("cm");
     }
-Serial.println();         
+Serial.println();
 return distanza;  
 
 }
