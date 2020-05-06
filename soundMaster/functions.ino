@@ -77,17 +77,18 @@ void ultrasuoni(){
  ************************************************************/
  
 void microfono(){
- 
- Serial.println("verifica che i sensori sono posti a 2 metri di distanza");
+
+  //variaibili necessarie alla rilevazione con sensore acustico
+  unsigned long tZero, tUno;
+  bool inizio = true;
+  bool fine = true;
+  double deltaT;
+  
+  Serial.println("verifica che i sensori sono posti a 2 metri di distanza");
   
   //attendo al pressione di un tasto qualsiasi
   
   Serial.println("");
-
-    //variaibili necessarie alla rilevazione con sensore acustico
-    unsigned long tZero, tUno, deltaT;
-    bool inizio = true;
-    bool fine = true;
 
 //eseguo un ciclo di 5 rilevazioni
           
@@ -126,8 +127,8 @@ void microfono(){
         Serial.println(tZero);
         Serial.print("t1 = ");
         Serial.println(tUno);
-        bool inizio = true;
-        bool fine = true;
+        inizio = true;
+        fine = true;
         delay(200);        
 
 
