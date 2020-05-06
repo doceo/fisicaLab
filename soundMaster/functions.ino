@@ -90,9 +90,7 @@ void microfono(){
     bool fine = true;
 
 //eseguo un ciclo di 5 rilevazioni
-   
-    for(int i = 0; i<1; i++){
-       
+          
 /*
  * eseguo un ciclo in attesa di un suono rilevato dal
  * microfono e reso pari ad un segnale "alto" dal 
@@ -131,7 +129,7 @@ void microfono(){
         bool inizio = true;
         bool fine = true;
         delay(200);        
-  }
+
 
   Serial.print("Il tempo e': ");
   Serial.print(deltaT);
