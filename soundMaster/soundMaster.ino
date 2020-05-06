@@ -1,4 +1,4 @@
-
+ 
 /*
  * rilevazione della velocità del suono in due modalità:
  * sensore ad ultrasioni
@@ -6,7 +6,7 @@
  */
 
 //distanza fissa in centimetri
-#define DIST 200
+#define DIST 100
 
 //parametri relativi ai pin a cui corrispondono i sensori
 #define TRIG A5

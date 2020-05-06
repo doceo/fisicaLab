@@ -91,7 +91,7 @@ void microfono(){
 
 //eseguo un ciclo di 5 rilevazioni
    
-    for(int i = 0; i<5; i++){
+    for(int i = 0; i<1; i++){
        
 /*
  * eseguo un ciclo in attesa di un suono rilevato dal
@@ -123,26 +123,22 @@ void microfono(){
  * ed alla costruzione del vettore TEMPO, poi rendo TRUE le variabili
  * utili ai cicli
  */
-        deltaT = tUno - tZero;
-
-        tempo[i]=deltaT;
+        deltaT = (tUno - tZero)/1000;
+        Serial.print("t0 = ");
+        Serial.println(tZero);
+        Serial.print("t1 = ");
+        Serial.println(tUno);
         bool inizio = true;
         bool fine = true;
         delay(200);        
   }
 
-  for(int i =0; i<5; i++){
-
-       timeAvg = (i*timeAvg + tempo[i])/(i+1);
-
-  }
+  Serial.print("Il tempo e': ");
+  Serial.print(deltaT);
+  Serial.println(" (millisecondi) ");   
+  Serial.println("");
   
-    Serial.print("Il tempo medio su cinque lanci e': ");
-    Serial.print(timeAvg);
-    Serial.println(" (millisecondi) ");   
-    Serial.println("");
-  
-  double vel = 2*(DIST/100)/(double(timeAvg)/1000);
+  double vel = (DIST/100)/(double(deltaT)/1000);
   Serial.print("la velocita' in m/s: ");
   Serial.println(vel);
   Serial.print("Il tempo intercorso tra la prima rilevazione e la seconda è: ");
@@ -150,6 +146,8 @@ void microfono(){
   Serial.println();
   
   Serial.println("");
+
+domanda();
  
 }
 /**************************************************************
