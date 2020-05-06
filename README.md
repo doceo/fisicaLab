@@ -1,4 +1,4 @@
-#Laboratorio di Fisica
+# Laboratorio di Fisica
 ### autori: prof. Diomede Mazzone e prof.ssa Francesca Aurelio
 
 Lo studio della fisica attraverso l’uso di strumenti di laboratorio risulta utile quando gli strumenti sono immediatamente fruibili, sia per gli studenti che per il docente e quindi ci si può concentrare sullo sviluppo di conoscenze e abilità relative agli argomenti in oggetto. Un tale approccio però presenta gli strumenti come una “black box”, appiattendo di conseguenza il processo formativo nella mera verifica delle condizioni teoriche. 
@@ -16,7 +16,7 @@ Utilizza la velocità del suono calcolata precedentemente per realizzare e tarar
 
 i file inclusi in questo pacchetto possono essere uno strumento utile ai docenti che lo riterranno opportuno.
 
-##hardware necessario
+## hardware necessario
 - Arduino (qualunque tipo)
 - sensore ad ultrasuoni hc-sr04
 - Sensore con microfono (SE482045)
