@@ -16,7 +16,7 @@
 #define NOISE_2 7
 
 // valore di conversione per il calcolo della distanza
-int cmconv = 49;
+float cmconv = 49;
 
 //vettore in cui salvare i valori rilevati
 double tempo[5];

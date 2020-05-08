@@ -8,9 +8,10 @@ void domanda(){
   Serial.println("");
   Serial.println("");
   Serial.println("");
-  Serial.println("Come vuoi rilevare la velocita' del suono?");
-  Serial.println("premi '1' per gli ultrasuoni");
-  Serial.println("premi '2' per le frequenze udibili"); 
+  Serial.println("Come vuoi procedere?");
+  Serial.println("premi '1' per ricavare la velocita' del suono con gli ultrasuoni");
+  Serial.println("premi '2' per ricavare la velocita' del suono con le frequenze udibili"); 
+  Serial.println("premi '3' per ricavare la velocita' di spostamento di un corpo");
   Serial.println("");
 
 }
@@ -20,7 +21,7 @@ void domanda(){
   * effettuate con il sensore ad ultrasuoni
   **************************************************************/
   
-void ultrasuoni(){
+double ultrasuoni(){
   
   Serial.println("verifica che il sensore sia a 2 metri da un ostacolo e poi premi un tasto qualsiasi");
   
@@ -66,6 +67,7 @@ void ultrasuoni(){
   Serial.println(vel);
 
   domanda();
+  return vel;
 }
 
 /*************************************************************
@@ -149,6 +151,8 @@ void microfono(){
 domanda();
  
 }
+
+
 /**************************************************************
  * TEMP() 
  * è il nodo centrale dell'esperimento perchè attraverso
@@ -205,54 +209,3 @@ return tempo;
     digitalWrite (BUZZER, LOW); 
 
  }
-
- /**************************************************** 
- *SENSORE A ULTRASUONI
- *rileva la distanza attraverso il sensore ad ultrasuoni 
- *a partire dalla conoscenza della velocità
- ****************************************************/
-
-double distanza(){
- 
-  double distanza;
-  
-  digitalWrite (TRIG, HIGH);                                        // attraverso il trigger inizia a emettere onde
-  delayMicroseconds(10);                                                   // per dieci microsecondi
-  digitalWrite(TRIG,LOW);                                           // e si ferma
-
-  long duration =pulseIn(ECHO, HIGH);                                  //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
-  Serial.print("duration: ");
-  Serial.println(duration);
-  Serial.print("durata (millisecondi): ");                                 //stampiamo sul monitor seriale la durata del segnale
-  double durationInMillis = (float)duration/1000;
-
-  Serial.println(durationInMillis);
-
-  
-  if (duration >500000) { 
-          Serial.println("fuori portata");                                 //segnaliamo se la distanza è fuori dalla portata dello strumento
-  
-  }else if(duration == 0){
-    
-   duration == 1000;
-    
-  }else{ 
-       // Serial.print("distanza:"); 
-        distanza = microsecondsToCentimeters(duration);
-       // Serial.print(distanza);
-       // Serial.println ("cm");
-    }
-Serial.println();
-return distanza;  
-
-}
-
-/*********************************************************
- * questa funzione è necessaria al calcolo della distanza
- * conoscendo la velocità del suono. Utilzza il fattore di 
- * conversione cmconv
- *********************************************************/
-double microsecondsToCentimeters(double microseconds){
-   return microseconds / cmconv;
-  }
- 
