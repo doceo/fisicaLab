@@ -1,4 +1,4 @@
-
+ 
 /*
  * rilevazione della velocità del suono in due modalità:
  * sensore ad ultrasioni
@@ -6,7 +6,7 @@
  */
 
 //distanza fissa in centimetri
-#define DIST 200
+#define DIST 100
 
 //parametri relativi ai pin a cui corrispondono i sensori
 #define TRIG A5
@@ -16,7 +16,7 @@
 #define NOISE_2 7
 
 // valore di conversione per il calcolo della distanza
-int cmconv =49;
+int cmconv = 49;
 
 //vettore in cui salvare i valori rilevati
 double tempo[5];
@@ -25,6 +25,7 @@ double tempo[5];
 double timeAvg = 0;
 double vel;
 bool start=false;
+
 
 
 void setup() {
@@ -40,28 +41,18 @@ void setup() {
     pinMode(ECHO, INPUT);
 
     pinMode(BUZZER, OUTPUT);
+    digitalWrite(BUZZER, LOW);
+
+    domanda();
 
 }
 
 void loop() {
-
-  Serial.println("Come vuoi rilevare la velocita' del suono?");
-  Serial.println("premi '1' per gli ultrasuoni");
-  Serial.println("premi 2 per le onde acustiche"); 
-  Serial.println("");
-
-    while (Serial.available() > 0) {
 
        if (Serial.read() == '1'){
           ultrasuoni();
        
        }else if(Serial.read() == '2'){
           microfono(); 
-       
-       }else{
-        Serial.println("scrivi 1 per il sonar oppure 2 per il microfono");
        }
-    }
-
-  
-} 
+}
