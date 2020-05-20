@@ -50,6 +50,8 @@ Serial.print(tempo);
 Serial.print(",");
 Serial.println(distance);  
 
+//inseriamo una pausa tra una rilevazione e l'altra
+//utile anche a non generare errori 
 delay(pausa);
   
   
